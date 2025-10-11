@@ -1,0 +1,362 @@
+/* Summary.css - Zerodha Style */
+.summary-zerodha {
+  background: #ffffff;
+  border-radius: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  padding: 0;
+  border: 1px solid #e0e0e0;
+  min-height: 400px;
+}
+
+/* User Welcome Section */
+.user-welcome {
+  padding: 20px 24px 16px 24px;
+  border-bottom: 1px solid #f5f5f5;
+  background: #fafafa;
+}
+
+.welcome-text {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #424242;
+  line-height: 1.3;
+}
+
+.welcome-subtitle {
+  font-size: 13px;
+  color: #757575;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* Dividers */
+.summary-divider {
+  height: 1px;
+  background: #e0e0e0;
+  margin: 0;
+}
+
+/* Section Styles */
+.summary-section {
+  padding: 20px 24px;
+  transition: background-color 0.2s ease;
+}
+
+.summary-section:hover {
+  background-color: #fafafa;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #424242;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.holdings-count {
+  font-size: 12px;
+  color: #757575;
+  font-weight: 500;
+}
+
+/* Equity Content */
+.equity-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.primary-metric {
+  text-align: left;
+}
+
+.metric-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #424242;
+  margin-bottom: 4px;
+  line-height: 1.2;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+}
+
+.metric-label {
+  font-size: 12px;
+  color: #757575;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Portfolio Metrics */
+.portfolio-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.holdings-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* P&L Section */
+.pnl-section {
+  text-align: left;
+}
+
+.pnl-value {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  line-height: 1.2;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+}
+
+.pnl-value.positive {
+  color: #00B386;
+}
+
+.pnl-value.negative {
+  color: #FF4D4D;
+}
+
+.pnl-percent {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.pnl-label {
+  font-size: 12px;
+  color: #757575;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Daily Performance */
+.performance-content {
+  display: flex;
+  justify-content: center;
+}
+
+.daily-pnl {
+  text-align: center;
+}
+
+.daily-value {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  line-height: 1.2;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+}
+
+.daily-value.positive {
+  color: #00B386;
+}
+
+.daily-value.negative {
+  color: #FF4D4D;
+}
+
+.daily-percent {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.daily-label {
+  font-size: 12px;
+  color: #757575;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Secondary Metrics */
+.secondary-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+}
+
+.metric-name {
+  font-size: 12px;
+  color: #757575;
+  font-weight: 500;
+}
+
+.metric-figure {
+  font-size: 12px;
+  font-weight: 600;
+  color: #424242;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: #f5f5f5;
+  border-top: 1px solid #e0e0e0;
+}
+
+.stat-card {
+  background: #ffffff;
+  padding: 16px 12px;
+  text-align: center;
+  border-right: 1px solid #f5f5f5;
+  transition: background-color 0.2s ease;
+}
+
+.stat-card:hover {
+  background: #f8f9fa;
+}
+
+.stat-card:last-child {
+  border-right: none;
+}
+
+.stat-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #424242;
+  margin-bottom: 4px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+}
+
+.stat-value.positive {
+  color: #00B386;
+}
+
+.stat-value.negative {
+  color: #FF4D4D;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #757575;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Loading State */
+.summary-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #757575;
+  font-size: 14px;
+  gap: 12px;
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #387ED1;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .summary-zerodha {
+    margin: 8px;
+    border-radius: 8px;
+  }
+  
+  .user-welcome {
+    padding: 16px 20px 12px 20px;
+  }
+  
+  .summary-section {
+    padding: 16px 20px;
+  }
+  
+  .equity-content,
+  .holdings-content {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .portfolio-metrics {
+    gap: 16px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-card {
+    border-right: none;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  
+  .stat-card:last-child {
+    border-bottom: none;
+  }
+  
+  .daily-value {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-welcome {
+    padding: 12px 16px 8px 16px;
+  }
+  
+  .summary-section {
+    padding: 12px 16px;
+  }
+  
+  .metric-value {
+    font-size: 16px;
+  }
+  
+  .pnl-value,
+  .daily-value {
+    font-size: 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  
+  .stat-card {
+    padding: 12px 8px;
+  }
+}

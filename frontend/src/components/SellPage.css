@@ -1,0 +1,292 @@
+/* SellPage.css */
+.sell-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 20px;
+}
+
+.sell-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.sell-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.sell-header h1 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 28px;
+}
+
+.back-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.back-btn:hover {
+  background: #5a6268;
+}
+
+.sell-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 24px;
+}
+
+.holdings-section h2,
+.sell-form-section h2 {
+  margin: 0 0 20px 0;
+  color: #2c3e50;
+  font-size: 20px;
+}
+
+.holdings-list {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.holding-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.holding-item:hover {
+  border-color: #387ED1;
+  background: #f8f9fa;
+}
+
+.holding-item.selected {
+  border-color: #387ED1;
+  background: #e3f2fd;
+}
+
+.holding-info {
+  flex: 1;
+}
+
+.holding-symbol {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 16px;
+}
+
+.holding-name {
+  color: #6c757d;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.holding-details {
+  text-align: right;
+}
+
+.holding-qty,
+.holding-avg,
+.holding-current {
+  font-size: 14px;
+  color: #495057;
+  margin-bottom: 2px;
+}
+
+.holding-current {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.no-holdings {
+  text-align: center;
+  padding: 40px;
+  color: #6c757d;
+}
+
+.sell-form {
+  background: #f8f9fa;
+  padding: 24px;
+  border-radius: 8px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #387ED1;
+}
+
+.market-price {
+  padding: 12px;
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.amount-summary {
+  background: white;
+  padding: 16px;
+  border-radius: 6px;
+  margin: 24px 0;
+  border: 1px solid #e9ecef;
+}
+
+.amount-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+}
+
+.amount {
+  font-weight: 600;
+  color: #00B386;
+  font-size: 20px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-sell {
+  background: #00B386;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.btn-sell:hover:not(:disabled) {
+  background: #009973;
+}
+
+.btn-sell:disabled {
+  background: #c8e6c9;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #387ED1;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sell-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .sell-header {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+}
+/* Add these styles to your existing SellPage.css */
+
+.processing-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffffff;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.btn-sell:disabled {
+  background: #c8e6c9;
+  cursor: not-allowed;
+}
+
+.amount-note {
+  font-size: 12px;
+  color: #00B386;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+.holding-item {
+  transition: all 0.2s ease;
+}
+
+.holding-item:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-group input:disabled,
+.form-group select:disabled {
+  background-color: #f8f9fa;
+  cursor: not-allowed;
+}
