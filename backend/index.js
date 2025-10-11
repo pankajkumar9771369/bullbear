@@ -21,8 +21,9 @@ const dbUrl = process.env.MONGO_URL ;
 const userVerification = require("./Middlewares/AuthMiddleware")
 // / Define the list of allowed origins
 app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true,
+  origin: 'http://localhost:3000', // Your frontend URL
+  credentials: true, // ✅ This is CRITICAL for cookies to work
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
 app.use(bodyParser.json());

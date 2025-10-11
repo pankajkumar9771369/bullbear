@@ -113,3 +113,25 @@ module.exports.userVerification = async (req, res) => {
     res.json({ status: false });
   }
 };
+// Add this to your authController.js
+module.exports.Logout = async (req, res) => {
+  try {
+    // Clear the HttpOnly cookie
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "Lax",
+      secure: process.env.NODE_ENV === "production"
+    });
+    
+    res.status(200).json({
+      success: true,
+      message: "Logged out successfully"
+    });
+  } catch (err) {
+    console.error("Logout error:", err);
+    res.status(500).json({ 
+      success: false, 
+      message: "Logout failed" 
+    });
+  }
+};
