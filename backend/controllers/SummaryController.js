@@ -2,7 +2,8 @@ const { HoldingsModel } = require("../model/HoldingsModel");
 const User = require("../model/UserModel"); // Use same import as middleware
 const axios = require('axios');
 
-const ALPHA_VANTAGE_API_KEY = "W68CVT873YRHJQNQ";
+require('dotenv').config();
+const ALPHA_VANTAGE_API_KEY = process.env.ALPHA_VANTAGE_API_KEY;
 
 module.exports.getSummary = async (req, res) => {
   try {

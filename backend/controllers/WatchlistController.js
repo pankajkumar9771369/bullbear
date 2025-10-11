@@ -2,7 +2,8 @@
 const { WatchlistModel } = require("../model/WatchlistModel");
 const axios = require('axios');
 
-const ALPHA_VANTAGE_API_KEY = "W68CVT873YRHJQNQ";
+require('dotenv').config();
+const ALPHA_VANTAGE_API_KEY = process.env.ALPHA_VANTAGE_API_KEY;
 
 // Get all watchlist items (auto-display default if empty)
 // controllers/WatchlistController.js

@@ -1,7 +1,8 @@
 const { PositionsModel } = require("../model/PositionsModel");
 const axios = require('axios');
 
-const ALPHA_VANTAGE_API_KEY = "W68CVT873YRHJQNQ";
+require('dotenv').config();
+const ALPHA_VANTAGE_API_KEY = process.env.ALPHA_VANTAGE_API_KEY;
 
 // Cache for stock prices
 const priceCache = new Map();
