@@ -1,4 +1,6 @@
-const stripe = require('stripe')('sk_test_51SG1KJGcwqDSIahjK693ZW87U7VLrrg5CtJHD6gpAIOfN3917QHDkGG2nVTwgoswYyamZELsSVdszBVp6OlISynx00KIMWSkWK');
+require('dotenv').config();  // Load env variables
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
 
 module.exports.creatPayment = async (req, res) => {
   try {
