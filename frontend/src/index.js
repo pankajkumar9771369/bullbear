@@ -18,49 +18,77 @@ import Home from "./components/Home";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false);
 
-  // Check authentication status on app load and when localStorage changes
+  // Check authentication status on app load
   useEffect(() => {
     const checkAuthStatus = () => {
       const token = localStorage.getItem("userToken");
-      setLoggedIn(!!token);
+      console.log("🔐 Auth check - Token found:", !!token);
+      
+      // Validate token properly
+      const isValidToken = token && token !== "undefined" && token !== "null" && token.length > 10;
+      
+      setLoggedIn(isValidToken);
+      setAuthChecked(true);
     };
 
     // Check immediately
     checkAuthStatus();
 
-    // Listen for storage changes (when login/signup sets token)
+    // Listen for storage changes
     const handleStorageChange = () => {
       checkAuthStatus();
     };
 
+    // Listen for custom auth changes
+    const handleAuthChange = () => {
+      checkAuthStatus();
+    };
+
     window.addEventListener('storage', handleStorageChange);
-    
-    // Also check periodically (optional but helpful)
-    const interval = setInterval(checkAuthStatus, 1000);
+    window.addEventListener('authChange', handleAuthChange);
 
     return () => {
       window.removeEventListener('storage', handleStorageChange);
-      clearInterval(interval);
+      window.removeEventListener('authChange', handleAuthChange);
     };
   }, []);
 
-  // Function to update login state (pass this to child components)
+  // Function to update login state
   const handleLoginSuccess = () => {
-    setLoggedIn(true);
+    console.log("✅ Login success callback triggered");
+    const token = localStorage.getItem("userToken");
+    const isValidToken = token && token !== "undefined" && token !== "null" && token.length > 10;
+    setLoggedIn(isValidToken);
   };
 
   // Function to handle logout
   const handleLogout = () => {
+    console.log("🚪 Logout triggered");
     localStorage.removeItem("userToken");
     localStorage.removeItem("userId");
     localStorage.removeItem("userName");
     setLoggedIn(false);
+    
+    // Dispatch events for synchronization
+    window.dispatchEvent(new Event('authChange'));
   };
+
+  // Show loading while checking auth status
+  if (!authChecked) {
+    return (
+      <div className="d-flex justify-content-center align-items-center min-vh-100">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <BrowserRouter>
-      {/* Pass handleLogout to Navbar if you have logout functionality */}
+      {/* Show Navbar only when NOT logged in */}
       {!loggedIn && <Navbar />}
 
       <Routes>

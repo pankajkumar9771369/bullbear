@@ -3,7 +3,6 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import './StripeCheckout.css';
 
-
 const stripePromise = loadStripe('pk_test_51SG1KJGcwqDSIahjfI4NDhYI0opeJyt7geqIiiPgZiFHQkCKcyqhOWI8m1fosrEMhAyzyVKBbeE1kU45bXfkUgOQ00RK9Np9Hi');
 
 const CheckoutForm = ({ onSuccess, onClose, amount, mode = 'add-funds', orderData }) => {
@@ -14,61 +13,58 @@ const CheckoutForm = ({ onSuccess, onClose, amount, mode = 'add-funds', orderDat
   const [userAmount, setUserAmount] = useState('');
   const [customAmount, setCustomAmount] = useState('');
 
-  const displayAmount = amount ? (amount / 100).toLocaleString('en-IN') : '';
+  // ✅ FIXED: Display amount in rupees (remove /100 division)
+  const displayAmount = amount ? amount.toLocaleString('en-IN') : '';
 
   // Function to create order in your system after successful payment
   const createOrderInSystem = async (paymentIntentId, token) => {
-  try {
-    if (mode === 'buy-stocks' && orderData) {
-      console.log("📦 Creating order in system with data:", orderData);
-      
-      const orderResponse = await fetch('http://localhost:3002/api/orders/create', { // ✅ Use correct endpoint
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          ...orderData,
-          paymentIntentId: paymentIntentId
-        }),
-      });
+    try {
+      if (mode === 'buy-stocks' && orderData) {
+        console.log("📦 Creating order in system with data:", orderData);
+        
+        const orderResponse = await fetch('http://localhost:3002/api/orders/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            ...orderData,
+            paymentIntentId: paymentIntentId
+          }),
+        });
 
-      // ✅ Check if response is JSON before parsing
-      const contentType = orderResponse.headers.get('content-type');
-      if (!orderResponse.ok) {
-        // Handle non-2xx responses
+        const contentType = orderResponse.headers.get('content-type');
+        if (!orderResponse.ok) {
+          if (contentType && contentType.includes('application/json')) {
+            const errorData = await orderResponse.json();
+            throw new Error(errorData.message || `HTTP error! status: ${orderResponse.status}`);
+          } else {
+            const text = await orderResponse.text();
+            throw new Error(`Server returned ${orderResponse.status} error: ${text.substring(0, 100)}`);
+          }
+        }
+
         if (contentType && contentType.includes('application/json')) {
-          const errorData = await orderResponse.json();
-          throw new Error(errorData.message || `HTTP error! status: ${orderResponse.status}`);
+          const orderResult = await orderResponse.json();
+          console.log("✅ Order created successfully:", orderResult);
+          return orderResult.success;
         } else {
-          // Handle HTML error pages
-          const text = await orderResponse.text();
-          throw new Error(`Server returned ${orderResponse.status} error: ${text.substring(0, 100)}`);
+          throw new Error('Server returned non-JSON response');
         }
       }
-
-      // ✅ Only parse as JSON if content-type is correct
-      if (contentType && contentType.includes('application/json')) {
-        const orderResult = await orderResponse.json();
-        console.log("✅ Order created successfully:", orderResult);
-        return orderResult.success;
-      } else {
-        throw new Error('Server returned non-JSON response');
-      }
+      
+      return true;
+    } catch (error) {
+      console.error('❌ Order creation error:', error);
+      throw error;
     }
-    
-    return true;
-  } catch (error) {
-    console.error('❌ Order creation error:', error);
-    throw error;
-  }
-};
+  };
 
   // Function to validate form based on mode
   const validateForm = () => {
     if (mode === 'buy-stocks') {
-      if (!amount || amount < 100) {
+      if (!amount || amount < 1) { // ✅ Now checking in rupees
         setError('Invalid payment amount');
         return false;
       }
@@ -106,13 +102,12 @@ const CheckoutForm = ({ onSuccess, onClose, amount, mode = 'add-funds', orderDat
       return;
     }
 
-    let finalAmountInPaise;
+    let finalAmountInRupees; // ✅ CHANGED: Now storing rupees
 
     if (mode === 'buy-stocks') {
-      finalAmountInPaise = amount;
+      finalAmountInRupees = amount; // ✅ Now in rupees
     } else {
-      const paymentAmount = parseInt(userAmount);
-      finalAmountInPaise = paymentAmount * 100;
+      finalAmountInRupees = parseInt(userAmount); // ✅ Now in rupees
     }
 
     setLoading(true);
@@ -127,7 +122,7 @@ const CheckoutForm = ({ onSuccess, onClose, amount, mode = 'add-funds', orderDat
         return;
       }
 
-      console.log("🔐 Using token for payment");
+      console.log("💰 Sending to backend in RUPEES:", finalAmountInRupees);
 
       // Create payment intent through backend
       const response = await fetch('http://localhost:3002/api/payment/create-payment-intent', {
@@ -137,7 +132,7 @@ const CheckoutForm = ({ onSuccess, onClose, amount, mode = 'add-funds', orderDat
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          amount: finalAmountInPaise,
+          amount: finalAmountInRupees, // ✅ NOW SENDING RUPEES
           currency: 'inr',
           metadata: {
             mode: mode,
@@ -182,7 +177,7 @@ const CheckoutForm = ({ onSuccess, onClose, amount, mode = 'add-funds', orderDat
           
           // Call onSuccess with payment data
           onSuccess({
-            amount: paymentIntent.amount,
+            amount: paymentIntent.amount / 100, // ✅ Convert back to rupees for frontend
             id: paymentIntent.id,
             status: paymentIntent.status,
             mode: mode

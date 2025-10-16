@@ -30,11 +30,14 @@ const Signup = ({ onLoginSuccess }) => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3002/api/auth/signup", // ✅ Backend runs on port 3003
+        "http://localhost:3002/api/auth/signup",
         { ...inputValue },
-        { withCredentials: true,headers: {
+        { 
+          withCredentials: true,
+          headers: {
             'Content-Type': 'application/json'
-          }}
+          }
+        }
       );
 
       console.log("Signup response:", data);
@@ -56,15 +59,24 @@ const Signup = ({ onLoginSuccess }) => {
           decodedToken.username || user?.username || "Trader"
         );
 
-        console.log("Token stored in localStorage successfully!");
+        console.log("✅ Signup successful - Token stored");
 
-        
+        // ✅ Call the parent's login success handler
         if (onLoginSuccess) {
           onLoginSuccess();
         }
+
+        // ✅ CRITICAL FIX: Dispatch storage event for same-tab sync
+        window.dispatchEvent(new Event('storage'));
+        window.dispatchEvent(new Event('authChange'));
+
+        console.log("✅ Auth events dispatched");
+
+        // Navigate to dashboard
         setTimeout(() => {
           navigate("/jammu");
-        }, 1200);
+        }, 1000);
+
       } else {
         handleError(message || "Signup failed: No token received");
       }

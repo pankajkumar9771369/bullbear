@@ -29,56 +29,52 @@ const Login = ({ onLoginSuccess }) => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3002/api/auth/login", // ✅ backend should run on port 3003
+        "http://localhost:3002/api/auth/login",
         { ...inputValue },
-        { withCredentials: true, }
+        { withCredentials: true }
       );
 
       console.log("Login response:", data);
 
       const { success, message, user, token } = data;
-console.log("Received token:", token);
+
       if (success && token) {
-        handleSuccess(message);
-
-     
+        // Store token and user data
+        localStorage.setItem("userToken", token);
+        
         const decodedToken = jwtDecode(token);
-        console.log("Decoded Token:", decodedToken);
-
-       
-       localStorage.setItem("userToken", token);  
-console.log("Saved token in localStorage:", token);  
-
-
         localStorage.setItem("userId", decodedToken.id || user?._id || "");
         localStorage.setItem(
           "userName",
           decodedToken.username || user?.username || "Trader"
         );
 
-        console.log("Stored user data in localStorage:");
-        console.log("User ID:", localStorage.getItem("userId"));
-        console.log("Username:", localStorage.getItem("userName"));
+        console.log("✅ Login successful - Token stored");
 
-        // ✅ Redirect to dashboard (jammu)
+        // Call the parent's login success handler
         if (onLoginSuccess) {
           onLoginSuccess();
         }
-       handleSuccess(message);
-navigate("/jammu");
-      
+        
+        handleSuccess(message);
+        
+        // Force storage event and navigate
+        window.dispatchEvent(new Event('storage'));
+        
+        // Navigate to dashboard
+        setTimeout(() => {
+          navigate("/jammu");
+        }, 100);
+        
       } else {
         handleError(message || "Login failed: No token received");
-        console.error("Login failed: No token received");
       }
     } catch (error) {
       console.error("Login error:", error);
       if (error.response) {
         handleError(error.response.data.message || "Invalid credentials");
-        console.error("Backend response error:", error.response.data);
       } else {
         handleError("Network error. Please try again.");
-        console.error("Network or server error during login", error);
       }
     }
   };
@@ -124,7 +120,7 @@ navigate("/jammu");
           </button>
         </form>
         <p className="text-center mt-3">
-          Don’t have an account? <Link to="/signup">Sign Up</Link>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
         </p>
       </div>
       <ToastContainer />
