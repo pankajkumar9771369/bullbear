@@ -30,7 +30,7 @@ const Signup = ({ onLoginSuccess }) => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3002/api/auth/signup",
+        "https://alphaedge.onrender.com/api/auth/signup",
         { ...inputValue },
         { 
           withCredentials: true,

@@ -27,7 +27,7 @@ const Summary = () => {
   // ✅ Fetch summary data from backend using stored token
   const fetchSummaryData = async (token) => {
     try {
-      const res = await axios.get("http://localhost:3002/api/summary", {
+      const res = await axios.get("https://alphaedge.onrender.com/api/summary", {
         headers: { 
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'

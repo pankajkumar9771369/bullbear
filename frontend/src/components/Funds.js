@@ -19,7 +19,7 @@ const Funds = () => {
   const fetchUserFunds = async () => {
     try {
       const token = localStorage.getItem('userToken');
-      const response = await fetch(`http://localhost:3002/api/funds/my-funds`, {
+      const response = await fetch(`https://alphaedge.onrender.com/api/funds/my-funds`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ const Funds = () => {
 
     try {
       const token = localStorage.getItem('userToken');
-      const response = await fetch('http://localhost:3002/api/funds/withdraw', {
+      const response = await fetch('https://alphaedge.onrender.com/api/funds/withdraw', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -107,7 +107,7 @@ const Funds = () => {
   const handlePaymentSuccess = async (paymentData) => {
     try {
       const token = localStorage.getItem('userToken');
-      const response = await fetch('http://localhost:3002/api/funds/add', {
+      const response = await fetch('https://alphaedge.onrender.com/api/funds/add', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

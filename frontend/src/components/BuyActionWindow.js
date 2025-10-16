@@ -23,7 +23,7 @@ const BuyActionWindow = ({ uid, currentPrice: initialPrice }) => {
       try {
         setLoading(true);
         // Fetch actual current price from your API
-        const response = await axios.get(`http://localhost:3002/api/stocks/price?symbol=${uid}`);
+        const response = await axios.get(`https://alphaedge.onrender.com/api/stocks/price?symbol=${uid}`);
         const price = response.data.currentPrice || response.data.price || 0;
         setCurrentPrice(price);
         setStockPrice(price);
@@ -63,7 +63,7 @@ const BuyActionWindow = ({ uid, currentPrice: initialPrice }) => {
     // Get token for authentication
     const token = localStorage.getItem("userToken");
     
-    const response = await axios.post("http://localhost:3002/api/orders/create", {
+    const response = await axios.post("https://alphaedge.onrender.com/api/orders/create", {
       name: uid,
       symbol: uid,
       qty: Number(stockQuantity),

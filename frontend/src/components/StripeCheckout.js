@@ -22,7 +22,7 @@ const CheckoutForm = ({ onSuccess, onClose, amount, mode = 'add-funds', orderDat
       if (mode === 'buy-stocks' && orderData) {
         console.log("📦 Creating order in system with data:", orderData);
         
-        const orderResponse = await fetch('http://localhost:3002/api/orders/create', {
+        const orderResponse = await fetch('https://alphaedge.onrender.com/api/orders/create', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -17,7 +17,7 @@ const WatchListSearch = ({ watchlist, setWatchlist }) => {
       try {
         console.log("🔍 Searching for:", term);
         const response = await axios.get(
-          `http://localhost:3002/api/stocks/search?q=${term}`
+          `https://alphaedge.onrender.com/api/stocks/search?q=${term}`
         );
         console.log("📊 Search results:", response.data);
         setSearchResults(response.data || []);
@@ -67,7 +67,7 @@ const WatchListSearch = ({ watchlist, setWatchlist }) => {
 
   try {
     // ✅ FIX: Use the correct endpoint /api/watchlist/add
-    const response = await axios.post("http://localhost:3002/api/watchlist/add", {
+    const response = await axios.post("https://alphaedge.onrender.com/api/watchlist/add", {
       name: name,
       symbol: symbol,
       fallbackPrice: 0
@@ -76,7 +76,7 @@ const WatchListSearch = ({ watchlist, setWatchlist }) => {
     console.log("✅ Stock added successfully:", response.data);
     
     // Refresh the watchlist after successful addition
-    const res = await axios.get("http://localhost:3002/api/watchlist");
+    const res = await axios.get("https://alphaedge.onrender.com/api/watchlist");
     setWatchlist(res.data);
     setSearchTerm("");
     setSearchResults([]);

@@ -21,7 +21,7 @@ const SellPage = () => {
     const fetchHoldings = async () => {
       try {
         const token = localStorage.getItem("userToken");
-        const response = await axios.get("http://localhost:3002/api/holdings", {
+        const response = await axios.get("https://alphaedge.onrender.com/api/holdings", {
           headers: { Authorization: `Bearer ${token}` }
         });
         
@@ -76,7 +76,7 @@ const SellPage = () => {
       // Step 1: Create sell order
       console.log("📦 Creating sell order...");
       const orderResponse = await axios.post(
-        "http://localhost:3002/api/orders/create",
+        "https://alphaedge.onrender.com/api/orders/create",
         {
           symbol: stock.symbol,
           name: stock.name,
@@ -99,7 +99,7 @@ const SellPage = () => {
       // Step 2: Credit funds to user's account
       console.log("💰 Crediting funds from sale...");
       const fundsResponse = await axios.post(
-        "http://localhost:3002/api/funds/add",
+        "https://alphaedge.onrender.com/api/funds/add",
         {
           amount: totalSaleAmount,
           paymentIntentId: `sell_${Date.now()}_${stock.symbol}_${Math.random().toString(36).substr(2, 9)}`,

@@ -12,7 +12,7 @@ const Holdings = () => {
         setLoading(true);
         const token = localStorage.getItem('userToken');
         
-        const response = await fetch('http://localhost:3002/api/holdings', {
+        const response = await fetch('https://alphaedge.onrender.com/api/holdings', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,

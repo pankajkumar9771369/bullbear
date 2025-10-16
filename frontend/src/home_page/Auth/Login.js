@@ -29,7 +29,7 @@ const Login = ({ onLoginSuccess }) => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3002/api/auth/login",
+        "https://alphaedge.onrender.com/api/auth/login",
         { ...inputValue },
         { withCredentials: true }
       );

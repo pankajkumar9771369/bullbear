@@ -20,7 +20,7 @@ const PaymentSuccess = () => {
       console.log(token);
 
         const response = await fetch(
-          `http://localhost:3002/api/payment/payment-intent/${paymentIntentId}`,
+          `https://alphaedge.onrender.com/api/payment/payment-intent/${paymentIntentId}`,
           {
             method: "GET",
             headers: {

@@ -14,7 +14,7 @@ const WatchList = () => {
   useEffect(() => {
     const fetchWatchlist = async () => {
       try {
-        const res = await axios.get("http://localhost:3002/api/watchlist");
+        const res = await axios.get("https://alphaedge.onrender.com/api/watchlist");
         setWatchlist(res.data || []);
       } catch (err) {
         console.error("Failed to fetch watchlist:", err);

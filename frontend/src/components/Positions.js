@@ -18,7 +18,7 @@ const Positions = () => {
         setLoading(true);
         const token = localStorage.getItem('userToken');
         
-        const response = await fetch('http://localhost:3002/api/positions', {
+        const response = await fetch('https://alphaedge.onrender.com/api/positions', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -63,7 +63,7 @@ const Positions = () => {
 
     try {
       const token = localStorage.getItem('userToken');
-      const response = await fetch('http://localhost:3002/api/positions/square-off', {
+      const response = await fetch('https://alphaedge.onrender.com/api/positions/square-off', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

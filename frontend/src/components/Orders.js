@@ -28,7 +28,7 @@ const Orders = () => {
       setLoading(true);
       
       const token = localStorage.getItem('userToken');
-      const response = await fetch('http://localhost:3002/api/orders', {
+      const response = await fetch('https://alphaedge.onrender.com/api/orders', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
