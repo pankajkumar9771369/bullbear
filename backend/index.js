@@ -21,8 +21,8 @@ const dbUrl = process.env.MONGO_URL ;
 const userVerification = require("./Middlewares/AuthMiddleware")
 // / Define the list of allowed origins
 app.use(cors({
-  origin: 'https://bullbear-68ox.onrender.com', // Your frontend URL
-  credentials: true, // ✅ This is CRITICAL for cookies to work
+  origin: 'https://zerodha-frontend-xtsa.onrender.com', // frontend URL
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 

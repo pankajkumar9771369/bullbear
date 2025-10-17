@@ -33,7 +33,7 @@ const Signup = ({ onLoginSuccess }) => {
         "https://alphaedge.onrender.com/api/auth/signup",
         { ...inputValue },
         { 
-          withCredentials: true,
+        
           headers: {
             'Content-Type': 'application/json'
           }
