@@ -125,7 +125,7 @@ const CheckoutForm = ({ onSuccess, onClose, amount, mode = 'add-funds', orderDat
       console.log("💰 Sending to backend in RUPEES:", finalAmountInRupees);
 
       // Create payment intent through backend
-      const response = await fetch('http://localhost:3002/api/payment/create-payment-intent', {
+      const response = await fetch('https://alphaedge.onrender.com/api/payment/create-payment-intent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

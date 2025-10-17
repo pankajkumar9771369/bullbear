@@ -19,7 +19,7 @@ const TopBar = () => {
 
   const fetchIndices = async () => {
     try {
-      const res = await axios.get("http://localhost:3002/api/indices");
+      const res = await axios.get("https://alphaedge.onrender.com/api/indices");
       setPrevIndices(indices);
       setIndices(res.data);
     } catch (err) {
